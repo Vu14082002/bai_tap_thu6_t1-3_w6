@@ -1,8 +1,33 @@
 import { Image, Pressable, Text, View } from "react-native";
 import { styles } from "./style";
+import { useState } from "react";
 
 export const Layout02 = function () {
     const box = ["#C5F1FB", "#F30D0D", "#000000", "#234896"];
+    const sourceImage = [
+        {
+            id: 0,
+            sourceImage: require("../../../assets/vs_blue.png"),
+        },
+        {
+            id: 1,
+            sourceImage: require("../../../assets/vs_red.png"),
+        },
+        {
+            id: 2,
+            sourceImage: require("../../../assets/vs_black.png"),
+        },
+        {
+            id: 3,
+            sourceImage: require("../../../assets/vs_silver.png"),
+        },
+    ];
+    const [imageSource, setImageSource] = useState(sourceImage[0]);
+
+    const handLerImageSourceChange = function (index) {
+        setImageSource(sourceImage[index]);
+    };
+    console.log(imageSource);
     return (
         <View style={styles.container}>
             <View style={styles.flex2}>
@@ -11,7 +36,7 @@ export const Layout02 = function () {
                         width: 112,
                         height: 132,
                     }}
-                    source={require("../../../assets/vs_blue.png")}
+                    source={imageSource.sourceImage}
                     resizeMode="contain"
                 />
                 <Text style={styles.lblTitle}>Điện Thoại Vsmart Joy 3 Hàng chính hãng</Text>
@@ -26,9 +51,14 @@ export const Layout02 = function () {
                     }}
                 >
                     <View>
-                        {box.map((e) => {
+                        {box.map((e, index) => {
                             return (
-                                <Pressable style={[styles.box, { backgroundColor: e }]}></Pressable>
+                                <Pressable
+                                    onPress={() => {
+                                        handLerImageSourceChange(index);
+                                    }}
+                                    style={[styles.box, { backgroundColor: e }]}
+                                ></Pressable>
                             );
                         })}
                     </View>
