@@ -1,7 +1,30 @@
 import { Image, Pressable, Text, View } from "react-native";
 import { styles } from "./style";
+import { useState } from "react";
 
-export const Layout01 = function () {
+export const Layout01 = function ({ navigation }) {
+    const sourceImage = [
+        {
+            id: 0,
+            path: require("../../../assets/vs_silver.png"),
+        },
+        {
+            id: 1,
+            path: require("../../../assets/vs_red.png"),
+        },
+        {
+            id: 2,
+            path: require("../../../assets/vs_black.png"),
+        },
+        {
+            id: 3,
+            path: require("../../../assets/vs_blue.png"),
+        },
+    ];
+    const [imageSource, setImageSource] = useState(sourceImage[3]);
+    const updateImageSource = function (date) {
+        setImageSource(date);
+    };
     return (
         <View style={[styles.container]}>
             <View style={{ flex: 6, width: "100%", alignItems: "center" }}>
@@ -10,7 +33,7 @@ export const Layout01 = function () {
                         width: 301,
                         height: 361,
                     }}
-                    source={require("../../../assets/vs_blue.png")}
+                    source={imageSource.path}
                 />
             </View>
             <View style={{ flex: 4, paddingLeft: 20 }}>
@@ -62,22 +85,25 @@ export const Layout01 = function () {
                         />
                     </View>
                     <Pressable style={styles.btn}>
-                        <View
-                            style={{
-                                width: "100%",
-                                flexDirection: "row",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Text style={styles.lblBtn}>4 MÀU-CHỌN MÀU</Text>
-                            <Image
-                                style={{
-                                    width: 12,
-                                    height: 14,
+                        <View>
+                            <Pressable
+                                onPress={() => {
+                                    navigation.navigate("layout02", {
+                                        data: { imageSource, updateImageSource },
+                                    });
                                 }}
-                                resizeMode="contain"
-                                source={require("../../../assets/vector.png")}
-                            />
+                                style={styles.btnSelect}
+                            >
+                                <Text style={styles.lblBtn}>4 MÀU-CHỌN MÀU</Text>
+                                <Image
+                                    style={{
+                                        width: 12,
+                                        height: 14,
+                                    }}
+                                    resizeMode="contain"
+                                    source={require("../../../assets/vector.png")}
+                                />
+                            </Pressable>
                         </View>
                     </Pressable>
                 </View>

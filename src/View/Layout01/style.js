@@ -47,6 +47,11 @@ export const styles = StyleSheet.create({
         width: "90%",
         textAlign: "center",
     },
+    btnSelect: {
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+    },
     btn: {
         lineHeight: 34,
         borderWidth: 1,
